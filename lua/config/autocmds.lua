@@ -59,7 +59,7 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "FileType" }, {
       },
     }
 
-    -- for _, group in ipairs(italic_overrides.groups) do
+    -- x for _, group in ipairs(italic_overrides.groups) do
     --   local existing = vim.api.nvim_get_hl(0, { name = group })
     --   -- local hl_opts = vim.tbl_extend("force", existing, { italic = true })
     --   vim.api.nvim_set_hl(0, group, { italic = true, fg = existing.fg })
