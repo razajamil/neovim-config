@@ -10,11 +10,14 @@
 vim.api.nvim_create_autocmd({ "ColorScheme", "FileType" }, {
   pattern = { "*", "javascriptreact", "typescriptreact" },
   callback = function()
-    local sonokai_red = "#fc5d7c" -- This is Sonokai's main red color
+    local sonokai_red = "#f76c7c"
+    local sonokai_yellow = "#e3d367"
+    local sonokai_grey = "#82878b"
+
     local white = "#ffffff"
 
     local highlight_overrides = {
-      -- JSX/TSX tags (red)
+      -- JSX/TSX tag
       {
         groups = {
           "@tag.tsx",
@@ -23,30 +26,45 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "FileType" }, {
           "@tag.delimiter.jsx",
           "@tag",
           "@tag.delimiter",
+          "@tag.builtin.tsx",
+
+          "@punctuation.special.tsx",
         },
         color = sonokai_red,
       },
-      -- You can add more arrays here for different colors
+      -- Variables and props
       {
         groups = {
           "@tag.attribute.tsx",
           "@tag.attribute.jsx",
           "@tag.attribute",
+          "@variable.member.typescript",
           "@variable.member.tsx",
+          "@variable.tsx",
+          "@type.typescript",
+          "@type.tsx",
           "@lsp.type.property.typescriptreact",
+          "@lsp.type.property.typescript",
         },
         color = white,
+      },
+      -- Import keyword
+      {
+        groups = {
+          "@keyword.import.tsx",
+          "@keyword.import.typescript",
+        },
+        color = sonokai_grey,
       },
     }
 
     for _, override in ipairs(highlight_overrides) do
       for _, group in ipairs(override.groups) do
-        local existing = vim.api.nvim_get_hl(0, { name = group })
-        -- local hl_opts = vim.tbl_extend("force", existing, { fg = override.color })
         vim.api.nvim_set_hl(0, group, { fg = override.color })
       end
     end
 
+    -- Make strings italic
     local italic_overrides = {
       groups = {
         "@string",
@@ -58,28 +76,8 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "FileType" }, {
         "stringLiteral",
       },
     }
-
-    -- x for _, group in ipairs(italic_overrides.groups) do
-    --   local existing = vim.api.nvim_get_hl(0, { name = group })
-    --   -- local hl_opts = vim.tbl_extend("force", existing, { italic = true })
-    --   vim.api.nvim_set_hl(0, group, { italic = true, fg = existing.fg })
-    -- end
-    --
-    -- JSX tags
-    -- vim.api.nvim_set_hl(0, "@tag.tsx", { fg = sonokai_red })
-    -- vim.api.nvim_set_hl(0, "@tag.jsx", { fg = sonokai_red })
-    -- vim.api.nvim_set_hl(0, "@tag.delimiter.tsx", { fg = sonokai_red })
-    -- vim.api.nvim_set_hl(0, "@tag.delimiter.jsx", { fg = sonokai_red })
-    --
-    -- -- JSX attributes
-    -- vim.api.nvim_set_hl(0, "@tag.attribute.tsx", { fg = white })
-    -- vim.api.nvim_set_hl(0, "@tag.attribute.jsx", { fg = white })
-    --
-    -- vim.api.nvim_set_hl(0, "@variable.member.tsx", { fg = white })
-
-    -- Generic fallbacks
-    -- vim.api.nvim_set_hl(0, "@tag", { fg = sonokai_red })
-    -- vim.api.nvim_set_hl(0, "@tag.delimiter", { fg = sonokai_red })
-    -- vim.api.nvim_set_hl(0, "@tag.attribute", { fg = sonokai_red })
+    for _, group in ipairs(italic_overrides.groups) do
+      vim.api.nvim_set_hl(0, group, { italic = true, fg = sonokai_yellow })
+    end
   end,
 })
