@@ -12,6 +12,7 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "FileType" }, {
   callback = function()
     local sonokai_red = "#f76c7c"
     local sonokai_yellow = "#e3d367"
+    local sonokai_orange = "#f3a96a"
     local sonokai_grey = "#82878b"
 
     local white = "#ffffff"
@@ -32,7 +33,7 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "FileType" }, {
         },
         color = sonokai_red,
       },
-      -- Variables and props
+      -- Props
       {
         groups = {
           "@tag.attribute.tsx",
@@ -48,7 +49,6 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "FileType" }, {
         },
         color = white,
       },
-      -- Import keyword
       {
         groups = {
           "@keyword.import.tsx",
