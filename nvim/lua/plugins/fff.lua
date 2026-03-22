@@ -26,6 +26,13 @@ return {
         desc = "FFFind files",
       },
       {
+        "<leader><leader>", -- try it if you didn't it is a banger keybinding for a picker
+        function()
+          require("fff").find_files()
+        end,
+        desc = "FFFind files",
+      },
+      {
         "fg",
         function()
           require("fff").live_grep()
